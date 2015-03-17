@@ -1,7 +1,7 @@
 (function(){
 'use strict'
 
-function twodarray(x, y) {
+function TwoDArray(x, y) {
   var output = []
   for(var i=0; i < x; i++) {
     output[i] = []
@@ -12,6 +12,6 @@ function twodarray(x, y) {
   return output
 }
 
-module.exports = twodarray
+module.exports = TwoDArray
 
 }())

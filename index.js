@@ -10,7 +10,7 @@ var mersenne = require('mersenne')
 //==============================================================================
 // internal
 
-var twodarray = require('./modules/twodarray')
+var Grid = require('./modules/Grid')
 
 //==============================================================================
 // constants
@@ -28,12 +28,7 @@ var DX       = { 4: 1, 8: -1, 1:  0, 2: 0 }
 //==============================================================================
 // variables
 
-var x = 10
-var y = 10
-
-// create a new grid
-var grid = twodarray(y, x)
-//console.log(grid)
+var grid = new Grid(10, 10)
 
 //==============================================================================
 // functions
@@ -44,7 +39,6 @@ function within(value, rangeMin, rangeMax) {
 
 // kick off the worker function
 function carvePassagesFrom(cx, cy, grid) {
-
   // create a list of directions that should be tried
   var directions = _.shuffle([N, S, E, W])
 
@@ -67,12 +61,14 @@ function carvePassagesFrom(cx, cy, grid) {
   }
 }
 
+// simple render function
+function renderMaze(maze) {
+}
+
 //==============================================================================
 // run
 
-carvePassagesFrom(0, 0, grid)
-
-console.log(grid)
-
+carvePassagesFrom(0, 0, grid.data)
+console.log(grid.data)
 
 }())
