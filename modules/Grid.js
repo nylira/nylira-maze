@@ -4,9 +4,9 @@
 var TwoDArray = require('./TwoDArray')
 
 function Grid(width, height){
-  this.width = width
   this.height = height
-  this.data = new TwoDArray(this.width, this.height)
+  this.width = width
+  this.data = new TwoDArray(this.height, this.width)
 }
 
 module.exports = Grid
