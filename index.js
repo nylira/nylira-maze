@@ -5,7 +5,6 @@
 // external
 
 var mersenne = require('mersenne')
-  , ndarray  = require('ndarray')
   , _        = require('lodash')
 
 //==============================================================================
@@ -39,6 +38,10 @@ var grid = twodarray(y, x)
 //==============================================================================
 // functions
 
+function within(value, rangeMin, rangeMax) {
+  return  _.contains(_.range(rangeMin, rangeMax), value)
+}
+
 // kick off the worker function
 function carvePassagesFrom(cx, cy, grid) {
 
@@ -48,22 +51,15 @@ function carvePassagesFrom(cx, cy, grid) {
   // for each direction
   for(var i=0; i < directions.length; i++) {
     var direction = directions[i]
-    //console.log('directions[i]', directions[i])
-
-    // next X value
     var nx = cx + DX[direction]
-    //console.log('nx', nx)
-
-    // next Y value
     var ny = cy + DY[direction]
-    //console.log('ny', ny)
-    console.log('grid[ny]', grid[ny])
 
-    var nyIsValid = _.contains(_.range(0, grid.length - 1), ny)
-    var nxIsValid = _.contains(_.range(0, grid[ny].length - 1), nx)
-    var cellIsEmpty = grid[ny][nx] === 0
-
-    if(nyIsValid && nxIsValid && cellIsEmpty) {
+    // if the nx value is within the grid
+    // && the ny value is wthin the grid
+    // && the [nx, ny] value is not set
+    if( within(ny, 0, grid.length) &&
+        within(nx, 0, grid[ny].length) &&
+        grid[ny][nx] === 0) {
       grid[cy][cx] |= direction
       grid[ny][nx] |= OPPOSITE[direction]
       carvePassagesFrom(nx, ny, grid)
