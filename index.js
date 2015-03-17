@@ -20,9 +20,11 @@ var N = 1
   , E = 4
   , W = 8
 
-var DX       = { 4: 1, 8: -1, 1:  0, 2: 0 }
-  , DY       = { 4: 0, 8:  0, 1: -1, 2: 1 }
-  , OPPOSITE = { 4: W, W:  E, N:  S, S: N }
+var DIRS     = ['N', 'S', 'E', 'W']
+var DIRS_VAL = { N: N, S: S, E: E, W: W }
+var DX       = { E: 1, W: -1, N:  0, S: 0 }
+  , DY       = { E: 0, W:  0, N: -1, S: 1 }
+  , OPPOSITE = { E: W, W:  E, N:  S, S: N }
 
 //==============================================================================
 // variables
@@ -33,14 +35,9 @@ var grid = new Grid(4, 4)
 //==============================================================================
 // functions
 
-function within(value, rangeMin, rangeMax) {
-  return  _.contains(_.range(rangeMin, rangeMax), value)
-}
-
-// kick off the worker function
 function carvePassagesFrom(cx, cy, grid) {
   // create a list of directions that should be tried
-  var directions = _.shuffle([N, S, E, W])
+  var directions = _.shuffle(DIRS)
 
   // for each direction
   for(var i=0; i < directions.length; i++) {
@@ -48,13 +45,13 @@ function carvePassagesFrom(cx, cy, grid) {
     var nx = cx + DX[direction]
     var ny = cy + DY[direction]
 
-    // if the nx value is within the grid
-    // && the ny value is wthin the grid
-    // && the [nx, ny] value is not set
-    if( within(ny, 0, grid.length) &&
-        within(nx, 0, grid[ny].length) &&
+    // if the ny value is within the grid
+    // && the nx value is wthin the grid
+    // && the [ny, nx] value is not set
+    if( ny >= 0 && ny <= (grid.length - 1) &&
+        nx >= 0 && nx <= (grid[ny].length - 1) &&
         grid[ny][nx] === 0) {
-      grid[cy][cx] |= direction
+      grid[cy][cx] |= DIRS_VAL[direction]
       grid[ny][nx] |= OPPOSITE[direction]
       carvePassagesFrom(nx, ny, grid)
     }
@@ -78,7 +75,7 @@ function debugMaze(maze) {
         case 4: slot  = '   E'; break
         case 5: slot  = '  NE'; break
         case 6: slot  = '  SE'; break
-        case 7: slot  = '  NSE'; break
+        case 7: slot  = ' NSE'; break
         case 8: slot  = '   W'; break
         case 9: slot  = '  NW'; break
         case 10: slot = '  SW'; break
