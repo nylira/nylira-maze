@@ -57,14 +57,25 @@ function carvePassagesFrom(cx, cy, grid) {
   }
 }
 
+function maze(width, height, render) {
+  render = render !== undefined ? render : false
+
+  var grid = new Grid(width, height)
+  carvePassagesFrom(0, 0, grid.cells)
+
+  if(render) {
+    testRender(grid)
+  }
+  return grid
+}
+
+function testRender(grid) {
+  renderMaze(grid)
+}
+
 //==============================================================================
 // run
 
-var grid = new Grid(10, 20)
-carvePassagesFrom(0, 0, grid.data)
-renderMaze(grid)
-
-//console.log(grid.data)
-//debugMaze(grid.data)
+module.exports = maze
 
 }())

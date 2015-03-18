@@ -35,7 +35,7 @@ function renderMaze(maze) {
 */
 // simple render function
 function renderMaze(maze) {
-  var grid = maze.data
+  var grid = maze.cells
 
   // draw top border
   console.log(' ' + '_'.repeat(maze.width * 2  - 1))
