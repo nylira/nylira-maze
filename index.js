@@ -10,7 +10,7 @@ var mersenne = require('mersenne')
 //==============================================================================
 // internal
 
-var Grid = require('./modules/Grid')
+var Grid = require('nylira-grid')
 var debugMaze = require('./modules/debugMaze')
 var renderMaze = require('./modules/renderMaze')
 
