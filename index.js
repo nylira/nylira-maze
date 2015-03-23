@@ -122,7 +122,7 @@ function move(cell, dir) {
   return [ny, nx]
 }
 
-function findDeadEnds(maze) {
+function findDeadEnds(maze, debug) {
   var deadEnds = []
   for(var y=0; y < maze.length; y++) {
     for(var x=0; x < maze[y].length; x++) {
@@ -131,22 +131,26 @@ function findDeadEnds(maze) {
       }
     }
   }
-  console.log('deadEnds', deadEnds)
+  //console.log('deadEnds', deadEnds)
   return deadEnds
 }
 
-function healCellWithHole(cell, dir, maze) {
+function healCellWithHole(cell, dir, maze, debug) {
   var cellValue = maze[cell[0]][cell[1]]
-  console.log('cell pre:', intToDirection(cellValue))
+  var newCellValue = 0
 
-  cellValue = cellValue - opposite(dir)
-  console.log('cell post:', intToDirection(cellValue))
+  // remove the hole by replacing the hole with its opposite
+  newCellValue = cellValue - opposite(dir)
 
-  maze[cell[0]][cell[1]] = cellValue
+  // set the maze cell to the healed value
+  maze[cell[0]][cell[1]] = newCellValue
+
+  //console.log('cell pre:', intToDirection(cellValue))
+  //console.log('cell post:', intToDirection(newCellValue))
 
   return maze
 }
-function removeDeadEnds(deadEnds, maze) {
+function removeDeadEnds(deadEnds, maze, debug) {
   // for each dead end
   for(var i=0; i < deadEnds.length; i++) {
     // save the dead end direction
@@ -157,10 +161,11 @@ function removeDeadEnds(deadEnds, maze) {
     maze[deadEnd[0]][deadEnd[1]] = 0
 
     // heal the gaping hole
-    console.log('____________________________________________')
-    console.log('deadEnd:', deadEnd, 'direction:', intToDirection(deadEndDir))
     var cellWithHole = move(deadEnd, deadEndDir)
-    console.log('cellWithHole', cellWithHole)
+
+    //console.log('____________________________________________')
+    //console.log('deadEnd:', deadEnd, 'direction:', intToDirection(deadEndDir))
+    //console.log('cellWithHole', cellWithHole)
 
     maze = healCellWithHole(cellWithHole, deadEndDir, maze)
   }
@@ -182,7 +187,7 @@ function sparsify(maze, sparseness) {
   //renderValues(maze)
 }
 
-sparsify(maze(40, 40))
+sparsify(maze(40, 40, 'growingtree'))
 //maze(10, 10, 'growingtree', undefined, true)
 
 module.exports = maze
