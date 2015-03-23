@@ -1,3 +1,3 @@
 var maze = require('../index.js')
 
-var testMaze = maze(11, 13, 'backtracker', undefined, true)
+var testMaze = maze(17, 23, 'backtracker', undefined, true)

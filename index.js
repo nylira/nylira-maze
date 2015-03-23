@@ -22,13 +22,17 @@ var MazeSettings = require('./lib/MazeSettings')
 
 function maze(width, height, algorithm, seed, debug) {
   width = width !== undefined ? width : 10
-  height = height !== undefined ? height : 10
+  height = height !== undefined ? height : width
   algorithm = algorithm !== undefined ? algorithm : 'backtracker'
   seed = seed !== undefined ? seed : Math.floor(Math.random() * 1000)
 
   var settings = new MazeSettings(seed)
 
-  var grid = new TwoDimensionalArray(width, height)
+  // NOTE: height and width are swapped here due to the structure of 2d arrays
+  // [ [x1, y1], [x2, y1], [x3, y1] ]
+  // [ [x1, y2], [x2, y2], [x3, y2] ]
+  // [ [x1, y3], [x2, y3], [x3, y3] ]
+  var grid = new TwoDimensionalArray(height, width)
 
   switch(algorithm) {
     case 'backtracker':
