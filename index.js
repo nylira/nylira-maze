@@ -19,6 +19,7 @@ var renderValues = require('./lib/debug/renderValues')
 var recursiveBacktracker = require('./lib/algorithms/recursiveBacktracker')
 var growingTree = require('./lib/algorithms/growingTree')
 var MazeSettings = require('./lib/MazeSettings')
+var intToDirection = require('./lib/utils/intToDirection')
 
 var settings = new MazeSettings()
 
@@ -134,6 +135,17 @@ function findDeadEnds(maze) {
   return deadEnds
 }
 
+function healCellWithHole(cell, dir, maze) {
+  var cellValue = maze[cell[0]][cell[1]]
+  console.log('cell pre:', intToDirection(cellValue))
+
+  cellValue = cellValue - opposite(dir)
+  console.log('cell post:', intToDirection(cellValue))
+
+  maze[cell[0]][cell[1]] = cellValue
+
+  return maze
+}
 function removeDeadEnds(deadEnds, maze) {
   // for each dead end
   for(var i=0; i < deadEnds.length; i++) {
@@ -145,15 +157,18 @@ function removeDeadEnds(deadEnds, maze) {
     maze[deadEnd[0]][deadEnd[1]] = 0
 
     // heal the gaping hole
-    console.log('deadEnd:', deadEnd, 'direction:', deadEndDir)
+    console.log('____________________________________________')
+    console.log('deadEnd:', deadEnd, 'direction:', intToDirection(deadEndDir))
     var cellWithHole = move(deadEnd, deadEndDir)
     console.log('cellWithHole', cellWithHole)
+
+    maze = healCellWithHole(cellWithHole, deadEndDir, maze)
   }
   return maze
 }
 
 function sparsify(maze, sparseness) {
-  sparseness = sparseness !== undefined ? sparseness : 2
+  sparseness = sparseness !== undefined ? sparseness : 10
 
   for(var i=0; i < sparseness; i++) {
     // find a list of dead ended cells to cull
@@ -164,10 +179,10 @@ function sparsify(maze, sparseness) {
   }
 
   renderMaze(maze)
-  renderValues(maze)
+  //renderValues(maze)
 }
 
-sparsify(maze(10, 10, 'growingtree'))
+sparsify(maze(40, 40))
 //maze(10, 10, 'growingtree', undefined, true)
 
 module.exports = maze
