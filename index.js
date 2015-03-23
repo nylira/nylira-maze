@@ -5,7 +5,6 @@
 // external
 
 //var mersenne = require('mersenne')
-var _        = require('lodash')
 var Grid = require('nylira-grid')
 
 //==============================================================================
@@ -15,11 +14,12 @@ var Grid = require('nylira-grid')
 var renderMaze = require('./lib/debug/renderMaze')
 var renderValues = require('./lib/debug/renderValues')
 var recursiveBacktracker = require('./lib/algorithms/recursiveBacktracker')
+var growingTree = require('./lib/algorithms/growingTree')
 
 //==============================================================================
 // functions
 
-function maze(width, height, mazeAlgorithm, debug ) {
+function maze(width, height, mazeAlgorithm, debug) {
   width = width !== undefined ? width : 10
   height = height !== undefined ? height : 10
   mazeAlgorithm = mazeAlgorithm !== undefined ? mazeAlgorithm : 'backtracker'
@@ -28,7 +28,10 @@ function maze(width, height, mazeAlgorithm, debug ) {
 
   switch(mazeAlgorithm) {
     case 'backtracker':
-      recursiveBacktracker(0, 0, grid.cells)
+      recursiveBacktracker(grid.cells)
+      break
+    case 'growingtree':
+      growingTree(grid.cells)
       break
   }
 
