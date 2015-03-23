@@ -1,18 +1,23 @@
 {
   "name": "nylira-maze",
-  "version": "0.1.6",
+  "version": "0.2.1",
   "description": "A library for generating mazes.",
   "main": "index.js",
   "scripts": {
     "test": "node ./test/test.js"
   },
   "keywords": [
+    "maze",
     "mazes",
-    "prim",
+    "procedural",
+    "roguelike",
+    "prims",
+    "prims-algorithm",
     "backtracker",
+    "recursive-backtracker",
+    "growing-tree",
     "theseus",
     "ariadne",
-    "maze",
     "labyrinth",
     "dungeon",
     "dungeons"
