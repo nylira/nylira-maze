@@ -41,7 +41,7 @@ Basic usage:
     // returns a 2d array of values for a 20x20 maze
     maze(15, 23)
 
-# Parameters
+## Parameters
 
 Keep reading to learn about the function call below: 
 
@@ -49,7 +49,14 @@ Keep reading to learn about the function call below:
 
 * **Parameter 1:** Width.
 * **Parameter 2:** Height.
-* **Parameter 3:** The maze generation algorithm. Options: `growing-tree`, `backtracker`
+* **Parameter 3:** The maze generation algorithm. Options:
+  * `"growing-tree:random"`: lots of dead ends, similar to Prim's Algorithm
+  * `"growing-tree:newest"`: long windy passages
+  * `"growing-tree:middle"`: lots of long straight passages
+  * `"growing-tree:oldest"`: only long straight passages
+  * `"growing-tree"`: synonym for `growing-tree:random`
+  * `"backtracker"`: long windy passages
+  * `undefined`: synonym for `growing-tree:newest`
 * **Parameter 4:** The integer seed for the maze. Putting a value here will guaranteee you can recreate the maze over and over again.
 * **Parameter 5:** You can preview the grid by passing in `true` as the fifth parameter.
 

@@ -25,7 +25,7 @@ var MazeSettings = require('./lib/MazeSettings')
 function maze(width, height, algorithm, seed, debug) {
   width = width !== undefined ? width : 10
   height = height !== undefined ? height : width
-  algorithm = algorithm !== undefined ? algorithm : 'growing tree'
+  algorithm = algorithm !== undefined ? algorithm : 'growingtree:newest'
   seed = seed !== undefined ? seed : Math.floor(Math.random() * 1000)
 
   var settings = new MazeSettings(seed)
@@ -42,6 +42,18 @@ function maze(width, height, algorithm, seed, debug) {
       break
     case 'growingtree':
       growingTree(settings, grid)
+      break
+    case 'growingtree:random':
+      growingTree(settings, grid, 'random')
+      break
+    case 'growingtree:newest':
+      growingTree(settings, grid, 'newest')
+      break
+    case 'growingtree:middle':
+      growingTree(settings, grid, 'middle')
+      break
+    case 'growingtree:oldest':
+      growingTree(settings, grid, 'oldest')
       break
   }
 
