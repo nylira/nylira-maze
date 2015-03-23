@@ -23,7 +23,7 @@ var MazeSettings = require('./lib/MazeSettings')
 function maze(width, height, algorithm, seed, debug) {
   width = width !== undefined ? width : 10
   height = height !== undefined ? height : width
-  algorithm = algorithm !== undefined ? algorithm : 'backtracker'
+  algorithm = algorithm !== undefined ? algorithm : 'growing tree'
   seed = seed !== undefined ? seed : Math.floor(Math.random() * 1000)
 
   var settings = new MazeSettings(seed)
@@ -45,7 +45,7 @@ function maze(width, height, algorithm, seed, debug) {
 
   if(debug) {
     renderMaze(grid)
-    renderValues(grid)
+    //renderValues(grid)
   }
 
   return grid

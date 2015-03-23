@@ -49,7 +49,7 @@ Keep reading to learn about the function call below:
 
 * **Parameter 1:** Width.
 * **Parameter 2:** Height.
-* **Parameter 3:** The maze generation algorithm. Currently only Recursive Backtracker is available (`'backtracker'`).
+* **Parameter 3:** The maze generation algorithm. Options: `growing-tree`, `backtracker`
 * **Parameter 4:** The integer seed for the maze. Putting a value here will guaranteee you can recreate the maze over and over again.
 * **Parameter 5:** You can preview the grid by passing in `true` as the fifth parameter.
 
