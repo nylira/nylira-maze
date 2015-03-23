@@ -7,7 +7,8 @@
 // external
 
 var MersenneTwister = require('mersenne-twister')
-var TwoDimensionalArray= require('nylira-2d-array')
+var TwoDimensionalArray = require('nylira-2d-array')
+var _ = require('lodash')
 
 //==============================================================================
 // internal
@@ -19,6 +20,8 @@ var recursiveBacktracker = require('./lib/algorithms/recursiveBacktracker')
 var growingTree = require('./lib/algorithms/growingTree')
 var MazeSettings = require('./lib/MazeSettings')
 
+var settings = new MazeSettings()
+
 //==============================================================================
 // functions
 
@@ -28,7 +31,7 @@ function maze(width, height, algorithm, seed, debug) {
   algorithm = algorithm !== undefined ? algorithm : 'growingtree:newest'
   seed = seed !== undefined ? seed : Math.floor(Math.random() * 1000)
 
-  var settings = new MazeSettings(seed)
+  var generator = new MersenneTwister(seed)
 
   // NOTE: height and width are swapped here due to the structure of 2d arrays
   // [ [x1, y1], [x2, y1], [x3, y1] ]
@@ -38,22 +41,22 @@ function maze(width, height, algorithm, seed, debug) {
 
   switch(algorithm) {
     case 'backtracker':
-      recursiveBacktracker(settings, grid)
+      recursiveBacktracker(generator, grid)
       break
     case 'growingtree':
-      growingTree(settings, grid)
+      growingTree(settings, generator, grid)
       break
     case 'growingtree:random':
-      growingTree(settings, grid, 'random')
+      growingTree(settings, generator, grid, 'random')
       break
     case 'growingtree:newest':
-      growingTree(settings, grid, 'newest')
+      growingTree(settings, generator, grid, 'newest')
       break
     case 'growingtree:middle':
-      growingTree(settings, grid, 'middle')
+      growingTree(settings, generator, grid, 'middle')
       break
     case 'growingtree:oldest':
-      growingTree(settings, grid, 'oldest')
+      growingTree(settings, generator, grid, 'oldest')
       break
   }
 
@@ -64,6 +67,48 @@ function maze(width, height, algorithm, seed, debug) {
 
   return grid
 }
+
+function isNSEW(cell) {
+  return _.includes([1, 2, 4, 8], cell)
+}
+
+function findDeadEnds(maze) {
+  var deadEnds = []
+  for(var y=0; y < maze.length; y++) {
+    for(var x=0; x < maze[y].length; x++) {
+      if(isNSEW(maze[y][x])) {
+        deadEnds.push([y,x])
+      }
+    }
+  }
+  console.log('deadEnds', deadEnds)
+  return deadEnds
+}
+
+function removeDeadEnds(deadEnds, maze) {
+  for(var i=0; i < deadEnds.length; i++) {
+    console.log('deadEnds[i]', deadEnds[i])
+    maze[deadEnds[i][0]].splice(deadEnds[i][1], 1)
+  }
+  return maze
+}
+
+function sparsify(maze, sparseness) {
+  sparseness = sparseness !== undefined ? sparseness : 3
+
+  for(var i=0; i < sparseness; i++) {
+    // find a list of dead ended cells to cull
+    var deadEnds = findDeadEnds(maze)
+
+    // remove the cells
+    maze = removeDeadEnds(deadEnds, maze)
+  }
+
+  renderMaze(maze)
+  renderValues(maze)
+}
+
+sparsify(maze())
 
 module.exports = maze
 

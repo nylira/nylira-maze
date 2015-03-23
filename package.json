@@ -25,6 +25,7 @@
   "author": "Peng Zhong",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^3.5.0",
     "mersenne-twister": "^1.0.1",
     "nylira-2d-array": "^0.1.1"
   },

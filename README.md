@@ -56,7 +56,6 @@ Keep reading to learn about the function call below:
   * `"growing-tree:oldest"`: only long straight passages
   * `"growing-tree"`: synonym for `growing-tree:random`
   * `"backtracker"`: long windy passages
-  * `undefined`: synonym for `growing-tree:newest`
 * **Parameter 4:** The integer seed for the maze. Putting a value here will guaranteee you can recreate the maze over and over again.
 * **Parameter 5:** You can preview the grid by passing in `true` as the fifth parameter.
 
