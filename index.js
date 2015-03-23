@@ -26,7 +26,7 @@ var settings = new MazeSettings()
 //==============================================================================
 // functions
 
-function maze(width, height, algorithm, seed, debug) {
+function maze(width, height, algorithm, sparseness, seed, debug) {
   width = width !== undefined ? width : 10
   height = height !== undefined ? height : width
   algorithm = algorithm !== undefined ? algorithm : 'growingtree:newest'
@@ -59,6 +59,10 @@ function maze(width, height, algorithm, seed, debug) {
     case 'growingtree:oldest':
       growingTree(settings, generator, grid, 'oldest')
       break
+  }
+
+  if(sparseness > 0) {
+    sparsify(grid, sparseness)
   }
 
   if(debug) {
@@ -208,14 +212,7 @@ function sparsify(maze, sparseness) {
     }
 
   }
-
-  renderMaze(maze)
-  //renderValues(maze)
 }
-
-sparsify(maze(40, 24, 'growingtree'), 0.75)
-//sparsify(maze(40, 24), 0.90)
-//maze(10, 10, 'growingtree', undefined, true)
 
 module.exports = maze
 
