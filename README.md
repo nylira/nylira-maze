@@ -4,9 +4,9 @@ A WIP library for generating maze data.
 
 # Install
 
-    npm install nylira-maze --save
+    npm i nylira-maze --save
 
-# Use it
+# Use
 
 Basic usage:
 
@@ -42,3 +42,9 @@ Want to preview the grid?
     |  _|__ |  ____ |_| | |  _| | | | |___|  _|__ |
     |  _____|____ |_|  _|___|___| |  _|   | |   | |
     |___________|_________________|_____|___|_|___|
+
+# Test
+
+Preview the results.
+
+    npm test
