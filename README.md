@@ -1,31 +1,60 @@
 # nylira-maze
 
-A WIP library for generating maze data.
+A JavaScript library for generating maze data.
 
-# Install
+     _______________________________________________________________________
+    | |  ______ |   |____  ____ |  __ |____ |  ____ |  __________    ______ |
+    | |___|   |  _| |  ___|  ___| | | |   |______ |___|   |  __ | |______ | |
+    |____ | | | |  ___|____ |____ |_____|______ |__ |__ | | |  _|_______| | |
+    |   |___| |_| |  ____ | |   |__________ | | | |_____| | |____  ____ | | |
+    | |____ | |  _|____ | |___|__ |____  __ | | |_________| |_____|  _____|_|
+    | |  _| | |  _____| |  ____ | |   |___| | |______ |______ |   |____ |   |
+    | |__ | | |_________|____ | |___|_______| | |   |______ |___| |   |_| | |
+    | |   | |______________ |_|__  __   |  __ | | |__ |   | |   |___| |  _| |
+    | | |___|   |__   |  ___|   | |  _|_|__ |_____| |___| | | | |   |___|  _|
+    | |__ |__ |   |_| | |  ___| |_|__ |   | |   |  ____ |___|_| | |________ |
+    | | | |  _|_|____ | |__ | |____ |  _| | |_|  _|__ | |  _______|   |  ___|
+    | | | | |  __ |___| | | |__  ___|   | | |  _|   | |___|  __ |__ | |____ |
+    | | | | | | | |  ___| | | | |_____|_| |___|  _| |__ |   | |_____|__ | | |
+    | |_____| | |___|   | | | |____ |   | |  ___|_______| | |____  _____| | |
+    |______ | |_______|__ | |______ | | | | |  ________ | |____ |_________| |
+    |______ |______ |   | | |  _____| |___| |________ |_______|_____________|
+    |  _____|______  _| | | |________ |  ______ |   |__ |____________     | |
+    |_______________|_______|_________|_______|___|___________________|_|___|
+
+## Installation
 
     npm i nylira-maze --save
 
-# Use
+## Usage
 
 Basic usage:
 
     var maze = require('nylira-maze')
 
-    // make a new 10x10 maze
+    // returns a 2d array of values for a 10x10 maze
     maze()
 
-    // make a new 20x20 maze
+    // returns a 2d array of values for a 20x20 maze
     maze(20)
 
-    // make a new 15x23 maze
+    // returns a 2d array of values for a 20x20 maze
     maze(15, 23)
 
-Want to preview the grid?
+# Parameters
 
-    maze(15, 23, true)
+Keep reading to learn about the function call below: 
 
-    // logs this to the console:
+    maze(11, 13, 'backtracker', undefined, true)
+
+* **Parameter 1:** Width.
+* **Parameter 2:** Height.
+* **Parameter 3:** The maze generation algorithm. Currently only Recursive Backtracker is available (`'backtracker'`).
+* **Parameter 4:** The integer seed for the maze. Putting a value here will guaranteee you can recreate the maze over and over again.
+* **Parameter 5:** You can preview the grid by passing in `true` as the fifth parameter.
+
+That function call above will generate the following:
+
     _______________________________________________
     | |  ________ |   |     |  ____   |__  ____  _|
     | | |  __ | | |_|__ | |_| |  ___|__ | |  _|__ |
@@ -43,8 +72,12 @@ Want to preview the grid?
     |  _____|____ |_|  _|___|___| |  _|   | |   | |
     |___________|_________________|_____|___|_|___|
 
-# Test
+## Test
 
-Preview the results.
+See if it works.
 
     npm test
+
+## License
+
+MIT
