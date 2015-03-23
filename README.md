@@ -40,25 +40,23 @@ Basic usage:
     // returns a 2d array of values for a 20x20 maze
     maze(20)
 
-    // returns a 2d array of values for a 20x20 maze
+    // returns a 2d array of values for a 15x23 maze
     maze(15, 23)
 
 ## Parameters
-
-Keep reading to learn about the function call below: 
 
     maze(31, 23, 'growing-tree:newest', 0.47, undefined, true)
 
 * **Parameter 1:** Width.
 * **Parameter 2:** Height.
 * **Parameter 3:** The maze generation algorithm. Options:
-  * `"growing-tree:random"`: lots of dead ends, similar to Prim's Algorithm
-  * `"growing-tree:newest"`: long windy passages
-  * `"growing-tree:middle"`: lots of long straight passages
-  * `"growing-tree:oldest"`: only long straight passages
-  * `"growing-tree"`: synonym for `growing-tree:random`
-  * `"backtracker"`: long windy passages
-* **Parameter 4:** Sparseness. A sparse maze will have some of its nodes removed. If you type in a value less than 1, e.g. 0.25, the maze will be 25% sparse. If you enter an integer value more than 1, e.g. 5, the maze will remove 5 nodes from all of its dead ends.
+  * `"growing-tree"`: The Growing Tree algorithm. Defaults to `random`.
+  * `"growing-tree:random"`: Lots of dead ends, similar to Prim's Algorithm
+  * `"growing-tree:newest"`: Long windy passages, similar to `"backtracker"`
+  * `"growing-tree:middle"`: Lots of long straight passages.
+  * `"growing-tree:oldest"`: Only long straight passages.
+  * `"backtracker"`: The Recursive Backtracker algorithm. Tends towards long and twisted passages.
+* **Parameter 4:** Sparseness. A sparse maze will have some of its nodes removed. If you type in a value less than 1, e.g. 0.25, the maze will be 25% sparse. If you enter an integer value more than 1, e.g. 5, the maze will remove 5 nodes from each of its dead ends.
 * **Parameter 5:** The integer seed for the maze. Putting a value here will guaranteee you can recreate the maze over and over again.
 * **Parameter 6:** You can preview the grid by passing in `true` as the fifth parameter.
 

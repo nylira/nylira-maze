@@ -1,8 +1,6 @@
 (function(){
 'use strict'
 
-// TODO: growing tree options
-
 //==============================================================================
 // external
 
@@ -205,6 +203,9 @@ function sparsify(maze, sparseness) {
 
   // if sparseness is more than 1, take away x number of tiles instead
   } else {
+
+    // in case the user puts in a non-integer value, round it
+    sparseness = Math.round(sparseness)
 
     for(var i=0; i < sparseness; i++) {
       deadEnds = findDeadEnds(maze)
