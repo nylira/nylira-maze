@@ -5,7 +5,6 @@ function print(data) {
   process.stdout.write(data)
 }
 
-
 // simple render function
 /*
 function renderMaze(maze) {

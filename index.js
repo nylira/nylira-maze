@@ -4,15 +4,16 @@
 //==============================================================================
 // external
 
-var mersenne = require('mersenne')
-  , _        = require('lodash')
+//var mersenne = require('mersenne')
+var _        = require('lodash')
+var Grid = require('nylira-grid')
 
 //==============================================================================
 // internal
 
-var Grid = require('nylira-grid')
-var debugMaze = require('./modules/debugMaze')
+//var debugMaze = require('./modules/debugMaze')
 var renderMaze = require('./modules/renderMaze')
+var renderValues = require('./modules/renderValues')
 
 //==============================================================================
 // constants
@@ -57,21 +58,23 @@ function carvePassagesFrom(cx, cy, grid) {
   }
 }
 
-function maze(width, height, render) {
-  render = render !== undefined ? render : false
-
+function maze(width, height, printMaze, printValues) {
   var grid = new Grid(width, height)
   carvePassagesFrom(0, 0, grid.cells)
 
-  if(render) {
-    testRender(grid)
+  if(printMaze) {
+    renderMaze(grid)
+  }
+  if(printValues) {
+    renderValues(grid.cells)
   }
   return grid
 }
 
-function testRender(grid) {
-  renderMaze(grid)
-}
+//==============================================================================
+// test
+
+//var testMaze = maze(10, 10, true, true)
 
 //==============================================================================
 // run
