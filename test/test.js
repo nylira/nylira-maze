@@ -1,6 +1,8 @@
 var maze = require('../index.js')
 
-//var testMaze = maze(17, 23, 'backtracker', undefined, true)
-//var testMaze = maze(20, 20, 'growingtree', undefined, undefined, true)
+//maze(17, 23, 'backtracker', undefined, true)
+//maze(20, 20, 'growingtree', undefined, undefined, true)
 
-var testMaze3 = maze(40, 20, 'growingtree:newest', 0.2, undefined, true)
+//maze(40, 20, 'growingtree:newest', 0.47, undefined, true)
+//
+maze(31, 23, 'growingtree', 0.65, undefined, true)
