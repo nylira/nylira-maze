@@ -5,7 +5,7 @@
 // external
 
 //var mersenne = require('mersenne')
-var Grid = require('nylira-grid')
+var TwoDimensionalArray= require('nylira-2d-array')
 
 //==============================================================================
 // internal
@@ -24,20 +24,20 @@ function maze(width, height, mazeAlgorithm, debug) {
   height = height !== undefined ? height : 10
   mazeAlgorithm = mazeAlgorithm !== undefined ? mazeAlgorithm : 'backtracker'
 
-  var grid = new Grid(width, height)
+  var grid = new TwoDimensionalArray(width, height)
 
   switch(mazeAlgorithm) {
     case 'backtracker':
-      recursiveBacktracker(grid.cells)
+      recursiveBacktracker(grid)
       break
     case 'growingtree':
-      growingTree(grid.cells)
+      growingTree(grid)
       break
   }
 
   if(debug) {
     renderMaze(grid)
-    renderValues(grid.cells)
+    renderValues(grid)
   }
 
   return grid

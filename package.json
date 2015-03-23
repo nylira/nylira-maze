@@ -23,7 +23,7 @@
     "enum": "^2.0.2",
     "lodash": "^3.5.0",
     "mersenne": "0.0.3",
-    "nylira-grid": "^0.1.5"
+    "nylira-2d-array": "^0.1.1"
   },
   "devDependencies": {},
   "repository": {
