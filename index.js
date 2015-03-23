@@ -172,22 +172,49 @@ function removeDeadEnds(deadEnds, maze, debug) {
   return maze
 }
 
+function validMazeArea(maze) {
+  var totalCells = maze.length * maze[0].length
+  var validCells = 0
+  for(var y=0; y < maze.length; y++) {
+    for(var x=0; x < maze[y].length; x++) {
+      if(maze[y][x] !== 0) {
+        validCells++
+      }
+    }
+  }
+  return validCells / totalCells
+}
+
 function sparsify(maze, sparseness) {
-  sparseness = sparseness !== undefined ? sparseness : 10
+  // set default sparseness to 25%
+  sparseness = sparseness !== undefined ? sparseness : 0.25
 
-  for(var i=0; i < sparseness; i++) {
-    // find a list of dead ended cells to cull
-    var deadEnds = findDeadEnds(maze)
+  var deadEnds = []
 
-    // remove the cells
-    maze = removeDeadEnds(deadEnds, maze)
+  // if sparseness is less than 1, treat it as a percentage
+  if(sparseness < 1) {
+
+    while(validMazeArea(maze) > 1 - sparseness) {
+      deadEnds = findDeadEnds(maze)
+      maze = removeDeadEnds(deadEnds, maze)
+    }
+
+  // if sparseness is more than 1, take away x number of tiles instead
+  } else {
+
+    for(var i=0; i < sparseness; i++) {
+      deadEnds = findDeadEnds(maze)
+      maze = removeDeadEnds(deadEnds, maze)
+    }
+
   }
 
   renderMaze(maze)
   //renderValues(maze)
 }
 
-sparsify(maze(40, 40, 'growingtree'))
+sparsify(maze(40, 24, 'growingtree'), 0.75)
+//sparsify(maze(40, 24), 0.90)
 //maze(10, 10, 'growingtree', undefined, true)
 
 module.exports = maze
