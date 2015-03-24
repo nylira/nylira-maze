@@ -93,7 +93,7 @@ The maze at the top of the README was generated with this function:
 
 ## Test
 
-See if it works.
+Check out a demo.
 
     npm test
 
